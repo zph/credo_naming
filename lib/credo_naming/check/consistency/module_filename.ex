@@ -99,8 +99,10 @@ defmodule CredoNaming.Check.Consistency.ModuleFilename do
       message: """
       The module defined in `#{filename}` is not named consistently with the filename. The file should be named either:
       #{inspect(expected_filenames)}
-      #
-      Rename it with `git mv #{filename} #{expected_filenames |> hd()}`
+      
+      Rename it with:
+
+      git mv #{filename} #{expected_filenames |> hd()}
       """,
       trigger: full_name,
       line_no: line_no
