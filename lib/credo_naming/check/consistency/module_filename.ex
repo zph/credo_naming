@@ -93,16 +93,17 @@ defmodule CredoNaming.Check.Consistency.ModuleFilename do
 
   defp root_modules(_), do: []
 
+  # Note: use second (ie at(1)) file because it's the succinct filenaming convention
   defp issue_for(issue_meta, line_no, %{filename: filename}, expected_filenames, full_name) do
     format_issue(
       issue_meta,
       message: """
       The module defined in `#{filename}` is not named consistently with the filename. The file should be named either:
       #{inspect(expected_filenames)}
-      
+
       Rename it with:
 
-      git mv #{filename} #{expected_filenames |> hd()}
+      git mv #{filename} #{expected_filenames |> Enum.at(1)}
       """,
       trigger: full_name,
       line_no: line_no
